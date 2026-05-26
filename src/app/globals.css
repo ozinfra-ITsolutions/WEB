@@ -1,0 +1,860 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-oz-primary: var(--oz-primary);
+  --color-oz-primary-hover: var(--oz-primary-hover);
+  --color-oz-primary-light: var(--oz-primary-light);
+  --color-oz-bg: var(--oz-bg);
+  --color-oz-surface: var(--oz-surface);
+  --color-oz-black: var(--oz-black);
+  --color-oz-white: var(--oz-white);
+  --color-oz-text: var(--oz-text);
+  --color-oz-text-secondary: var(--oz-text-secondary);
+  --color-oz-muted: var(--oz-text-muted);
+  --color-oz-warmgray: var(--oz-text-warmgray);
+  --color-oz-border: var(--oz-border);
+  --color-oz-border-light: var(--oz-border-light);
+
+  --color-oz-orange: var(--oz-primary);
+  --color-oz-orange-contrast: var(--oz-primary-contrast);
+  --color-oz-gray: var(--oz-text-secondary);
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --font-space: "Space Grotesk", sans-serif;
+  --font-body: "Inter", "Space Grotesk", sans-serif;
+
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xs: calc(var(--radius) - 6px);
+
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-float: float 3s ease-in-out infinite;
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+/*
+ * ============================================================
+ *  OzInfra — Global Design System
+ *  Single source of truth for ALL colors, typography, spacing.
+ *  Change these CSS variables to rebrand the entire site.
+ * ============================================================
+ */
+
+@layer base {
+  :root {
+    /* ── Brand Colors (CHANGE THESE TO REBRAND) ──────────── */
+    --oz-primary: #F85B1B;
+    --oz-primary-hover: #e04d10;
+    --oz-primary-light: rgba(248, 91, 27, 0.12);
+    --oz-primary-contrast: #D9450B; /* High-contrast orange passing WCAG AA on bright/white backgrounds */
+
+    /* ── Surface / Background ────────────────────────────── */
+    --oz-bg: #FAFAFA;
+    --oz-surface: #F5F5F0;
+    --oz-black: #171717;
+    --oz-white: #FAFAFA;
+
+    /* ── Text ────────────────────────────────────────────── */
+    --oz-text: #171717;
+    --oz-text-secondary: #525252;
+    --oz-text-muted: #78716c;
+    --oz-text-warmgray: #b0a89e;
+
+    /* ── Borders & Dividers ──────────────────────────────── */
+    --oz-border: #e5e5e5;
+    --oz-border-light: rgba(23, 23, 23, 0.1);
+
+    /* ── Typography ──────────────────────────────────────── */
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', 'Space Grotesk', sans-serif;
+
+    /* ── Spacing ─────────────────────────────────────────── */
+    --section-padding-x: 100px;
+    --section-padding-y: 120px;
+
+    /* ── Radii ───────────────────────────────────────────── */
+    --radius: 0px;
+
+    /* ── shadcn tokens (mapped to OzInfra) ────────────────  */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 9%;
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 98%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 17 94% 54%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 40 9% 95%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 40 9% 95%;
+    --muted-foreground: 0 0% 32%;
+    --accent: 17 94% 54%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 17 94% 54%;
+  }
+
+  html {
+    font-family: var(--font-heading);
+    scroll-behavior: smooth;
+  }
+
+  html {
+    position: relative;
+  }
+
+  body {
+    background-color: var(--oz-bg);
+    color: var(--oz-text);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    letter-spacing: -0.2px;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    word-break: keep-all;
+  }
+
+  ::selection {
+    background-color: var(--oz-primary);
+    color: var(--oz-white);
+  }
+
+  /* Skip nav for accessibility */
+  .skip-nav {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 9999;
+    padding: 1rem 2rem;
+    background: var(--oz-primary);
+    color: var(--oz-white);
+    font-family: var(--font-heading);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .skip-nav:focus {
+    left: 0;
+  }
+}
+
+@layer components {
+  /* ── Typography Scale ──────────────────────────────────── */
+  .text-display {
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 500;
+    line-height: 0.85;
+    letter-spacing: clamp(-2px, -0.04em, -5.76px);
+    font-family: var(--font-heading);
+  }
+
+  .text-section {
+    font-size: clamp(36px, 5vw, 75px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -1.92px;
+    font-family: var(--font-heading);
+  }
+
+  .text-card {
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -1.2px;
+    font-family: var(--font-heading);
+  }
+
+  .text-nav {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.28px;
+    font-family: var(--font-heading);
+  }
+
+  /* ── Section Padding ───────────────────────────────────── */
+  .section-padding {
+    padding: var(--section-padding-y) var(--section-padding-x);
+  }
+
+  @media (max-width: 1024px) {
+    .section-padding {
+      padding: 80px 40px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .section-padding {
+      padding: 60px 20px;
+    }
+  }
+}
+
+  /* ── Universal Liquid Fill Button (Ultra-Premium Fluid) ── */
+  .liquid-btn {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 32px;
+    height: 56px;
+    border-radius: 50px;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.4s ease, color 0.4s ease;
+    user-select: none;
+    isolation: isolate;
+    text-decoration: none;
+    
+    /* Decoupled Background (makes pseudo-element layers visible) */
+    background: transparent !important;
+  }
+
+  /* Base Background Layer (behind liquid fill) */
+  .liquid-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    transition: background-color 0.6s ease;
+    background-color: var(--oz-black);
+  }
+
+  /* Active Press Effect with Bolder Glow */
+  .liquid-btn:active:not(:disabled) {
+    transform: scale(0.96);
+  }
+
+  /* Liquid Fill Layer using the precise cubic-bezier */
+  .liquid-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(100%);
+    transition: transform 0.85s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: -1;
+    background-color: var(--oz-primary);
+  }
+
+  .liquid-btn:hover::before {
+    transform: translateY(0);
+  }
+
+  /* Text Shifting Layout */
+  .liquid-btn .text-wrapper {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  .liquid-btn span.default-text,
+  .liquid-btn span.hover-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    transition: transform 0.85s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .liquid-btn span.default-text {
+    transform: translateY(0);
+  }
+
+  .liquid-btn span.hover-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%);
+  }
+
+  .liquid-btn:hover .default-text {
+    transform: translateY(-100%);
+  }
+
+  .liquid-btn:hover .hover-text {
+    transform: translateY(0);
+  }
+
+  /* Icon Animations */
+  .liquid-btn .icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    z-index: 1;
+    transition: transform 0.85s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .liquid-btn:hover .icon-wrapper {
+    transform: translateX(4px);
+  }
+
+  /* Sizing Modifiers */
+  .liquid-btn-sm {
+    height: 44px;
+    padding: 0 24px;
+    font-size: 12px;
+  }
+  
+  .liquid-btn-lg {
+    height: 64px;
+    padding: 0 40px;
+    font-size: 15px;
+  }
+
+  /* Disabled State */
+  .liquid-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .liquid-btn:disabled::before,
+  .liquid-btn:disabled::after {
+    display: none;
+  }
+  
+  /* ── Variants ── */
+
+  /* 1. Primary (Dark gray background, orange fill) */
+  .liquid-btn-primary {
+    color: var(--oz-white);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .liquid-btn-primary::after {
+    background-color: var(--oz-black);
+  }
+  
+  .liquid-btn-primary::before {
+    background-color: var(--oz-primary);
+  }
+
+  .liquid-btn-primary:active:not(:disabled) {
+    box-shadow: 0 0 35px 5px rgba(248, 91, 27, 0.6);
+  }
+
+  /* 2. White (White background, orange fill) */
+  .liquid-btn-white {
+    color: var(--oz-black);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .liquid-btn-white::after {
+    background-color: var(--oz-white);
+  }
+
+  .liquid-btn-white::before {
+    background-color: var(--oz-primary);
+  }
+
+  .liquid-btn-white:hover {
+    color: var(--oz-white);
+  }
+
+  .liquid-btn-white:active:not(:disabled) {
+    box-shadow: 0 0 35px 5px rgba(248, 91, 27, 0.5);
+  }
+
+  /* 3. Dark (Same as primary or custom details) */
+  .liquid-btn-dark {
+    color: var(--oz-white);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .liquid-btn-dark::after {
+    background-color: var(--oz-black);
+  }
+
+  .liquid-btn-dark::before {
+    background-color: var(--oz-primary);
+  }
+
+  .liquid-btn-dark:active:not(:disabled) {
+    box-shadow: 0 0 35px 5px rgba(248, 91, 27, 0.6);
+  }
+
+  /* 4. Outline (Transparent background, orange border and fill) */
+  .liquid-btn-outline {
+    color: var(--oz-primary);
+    border: 2px solid var(--oz-primary);
+  }
+
+  .liquid-btn-outline::after {
+    background-color: transparent;
+  }
+
+  .liquid-btn-outline::before {
+    background-color: var(--oz-primary);
+  }
+
+  .liquid-btn-outline:hover {
+    color: var(--oz-white);
+  }
+
+  .liquid-btn-outline:active:not(:disabled) {
+    box-shadow: 0 0 35px 5px rgba(248, 91, 27, 0.4);
+  }
+
+  /* 5. White Outline (Transparent background, white border, fills with white) */
+  .liquid-btn-white-outline {
+    color: var(--oz-white);
+    border: 2px solid var(--oz-white);
+  }
+
+  .liquid-btn-white-outline::after {
+    background-color: transparent;
+  }
+
+  .liquid-btn-white-outline::before {
+    background-color: var(--oz-white);
+  }
+
+  .liquid-btn-white-outline:hover {
+    color: var(--oz-primary);
+  }
+
+  .liquid-btn-white-outline:active:not(:disabled) {
+    box-shadow: 0 0 35px 5px rgba(255, 255, 255, 0.4);
+  }
+
+  /* ── Word Reveal Animation ─────────────────────────────── */
+  .word-reveal {
+    display: inline-block;
+    overflow: hidden;
+  }
+
+  .word-reveal span {
+    display: inline-block;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+  }
+
+  .word-reveal.revealed span {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* ── Slide Animations ──────────────────────────────────── */
+  .slide-left {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  .slide-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .slide-right {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+
+  .slide-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── Reduced Motion ────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ── Global Pointer Cursor for Interactive Elements ───── */
+  button:not(:disabled),
+  a,
+  select,
+  input[type="button"],
+  input[type="submit"],
+  [role="button"],
+  summary,
+  .cursor-pointer {
+    cursor: pointer !important;
+  }
+
+  /* 6. White to Black (White bg default, fills with black on hover — for orange sections) */
+  .liquid-btn-white-to-black {
+    color: var(--oz-black);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .liquid-btn-white-to-black::after {
+    background-color: var(--oz-white);
+  }
+
+  .liquid-btn-white-to-black::before {
+    background-color: var(--oz-black);
+  }
+
+  .liquid-btn-white-to-black:hover {
+    color: var(--oz-white);
+  }
+
+  .liquid-btn-white-to-black:active:not(:disabled) {
+    box-shadow: 0 0 35px 5px rgba(23, 23, 23, 0.4);
+  }
+
+  /* 7. Orange Outline (Transparent bg + white border, fills with white on hover — for orange sections) */
+  .liquid-btn-orange-outline {
+    color: var(--oz-white);
+    border: 2px solid var(--oz-white);
+  }
+
+  .liquid-btn-orange-outline::after {
+    background-color: transparent;
+  }
+
+  .liquid-btn-orange-outline::before {
+    background-color: var(--oz-white);
+  }
+
+  .liquid-btn-orange-outline:hover {
+    color: var(--oz-primary);
+  }
+
+  .liquid-btn-orange-outline:active:not(:disabled) {
+    box-shadow: 0 0 35px 5px rgba(255, 255, 255, 0.3);
+  }
+
+/* ================================================================
+ *  Pixel Dissolve Button — Premium Form CTA
+ * ================================================================ */
+
+.pixel-dissolve-btn {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 56px;
+  padding: 0 32px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  isolation: isolate;
+  background: var(--oz-primary);
+  border: none;
+  margin: 0;
+  /* Subtle brand glow at rest */
+  box-shadow: 0 0 0 1px rgba(248, 91, 27, 0.15),
+              0 4px 24px -4px rgba(248, 91, 27, 0.10);
+  transition: box-shadow 0.4s ease, transform 0.2s ease, background 0s;
+}
+
+.pixel-dissolve-btn:hover:not(.pixel-dissolve-btn--disabled) {
+  background: var(--oz-primary-hover);
+  box-shadow: 0 0 0 1px rgba(248, 91, 27, 0.3),
+              0 8px 40px -8px rgba(248, 91, 27, 0.25);
+}
+
+.pixel-dissolve-btn:active:not(.pixel-dissolve-btn--disabled) {
+  transform: scale(0.97);
+  box-shadow: 0 0 0 1px rgba(248, 91, 27, 0.5),
+              0 0 60px -6px rgba(248, 91, 27, 0.35);
+}
+
+.pixel-dissolve-btn:focus-visible {
+  outline: 2px solid var(--oz-primary);
+  outline-offset: 3px;
+}
+
+/* Disabled / loading state */
+.pixel-dissolve-btn--disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Dissolved state */
+.pixel-dissolve-btn--dissolved {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ── Pixel Grid Container ─────────────────────────── */
+.pixel-dissolve-btn__grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0s;
+}
+
+.pixel-dissolve-btn--dissolved .pixel-dissolve-btn__grid {
+  opacity: 1;
+}
+
+/* ── Individual Pixel ─────────────────────────────── */
+.pixel-dissolve-btn__pixel {
+  position: absolute;
+  background-color: var(--oz-primary);
+  will-change: transform, opacity;
+  transform: scale(1.02) rotate(0deg); /* Tiny overlap to cover any subpixel cracks */
+  opacity: 1;
+  transition:
+    transform 1.2s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 1.0s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.pixel-dissolve-btn__pixel--dissolved {
+  transform: scale(0) rotate(15deg);
+  opacity: 0;
+}
+
+/* ── Label ────────────────────────────────────────── */
+.pixel-dissolve-btn__label {
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--oz-white);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  pointer-events: none;
+  transition: opacity 0.18s ease-out;
+  white-space: nowrap;
+}
+
+.pixel-dissolve-btn__label--hidden {
+  opacity: 0;
+}
+
+/* ── Loading Spinner ──────────────────────────────── */
+.pixel-dissolve-btn__spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: var(--oz-white);
+  border-radius: 50%;
+  animation: pixel-btn-spin 0.7s linear infinite;
+}
+
+@keyframes pixel-btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Reduced Motion ───────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .pixel-dissolve-btn__pixel {
+    transition-duration: 0.01ms !important;
+  }
+  .pixel-dissolve-btn__label {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ================================================================
+ *  CPU Architecture — SVG Circuit Animation
+ * ================================================================ */
+
+/* Primary glow nodes — large, slow, dramatic */
+.cpu-architecture {
+  offset-anchor: 10px 0px;
+  animation: animation-path;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cpu-line-1 {
+  offset-path: path("M 10 20 h 79.5 q 5 0 5 5 v 30");
+  animation-duration: 4s;
+  animation-delay: 0.5s;
+}
+.cpu-line-2 {
+  offset-path: path("M 180 10 h -69.7 q -5 0 -5 5 v 40");
+  animation-delay: 2s;
+  animation-duration: 3.5s;
+}
+.cpu-line-3 {
+  offset-path: path("M 130 20 v 21.8 q 0 5 -5 5 h -25");
+  animation-delay: 1s;
+  animation-duration: 5s;
+}
+.cpu-line-4 {
+  offset-path: path("M 170 80 v -21.8 q 0 -5 -5 -5 h -65");
+  animation-delay: 0s;
+  animation-duration: 3s;
+}
+.cpu-line-5 {
+  offset-path: path("M 135 65 h 15 q 5 0 5 5 v 10 q 0 5 -5 5 h -39.8 q -5 0 -5 -5 v -35");
+  animation-delay: 3s;
+  animation-duration: 4.5s;
+}
+.cpu-line-6 {
+  offset-path: path("M 94.8 95 v -46");
+  animation-delay: 1.5s;
+  animation-duration: 3s;
+}
+.cpu-line-7 {
+  offset-path: path("M 88 88 v -15 q 0 -5 -5 -5 h -10 q -5 0 -5 -5 v -5 q 0 -5 5 -5 h 28");
+  animation-delay: 2.5s;
+  animation-duration: 3.5s;
+}
+.cpu-line-8 {
+  offset-path: path("M 30 30 h 25 q 5 0 5 5 v 6.5 q 0 5 5 5 h 35");
+  animation-delay: 0.8s;
+  animation-duration: 2.8s;
+}
+
+/* Secondary data packets — small, fast, liquid-like */
+.cpu-data-packet {
+  offset-anchor: 4px 0px;
+  animation: animation-path-data;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cpu-data-1 {
+  offset-path: path("M 10 20 h 79.5 q 5 0 5 5 v 30");
+  animation-duration: 2.2s;
+  animation-delay: 1.8s;
+}
+.cpu-data-2 {
+  offset-path: path("M 180 10 h -69.7 q -5 0 -5 5 v 40");
+  animation-duration: 1.8s;
+  animation-delay: 0.5s;
+}
+.cpu-data-4 {
+  offset-path: path("M 170 80 v -21.8 q 0 -5 -5 -5 h -65");
+  animation-duration: 1.5s;
+  animation-delay: 2.2s;
+}
+.cpu-data-5 {
+  offset-path: path("M 135 65 h 15 q 5 0 5 5 v 10 q 0 5 -5 5 h -39.8 q -5 0 -5 -5 v -35");
+  animation-duration: 2.5s;
+  animation-delay: 0.3s;
+}
+.cpu-data-7 {
+  offset-path: path("M 88 88 v -15 q 0 -5 -5 -5 h -10 q -5 0 -5 -5 v -5 q 0 -5 5 -5 h 28");
+  animation-duration: 1.8s;
+  animation-delay: 1.2s;
+}
+.cpu-data-8 {
+  offset-path: path("M 30 30 h 25 q 5 0 5 5 v 6.5 q 0 5 5 5 h 35");
+  animation-duration: 1.5s;
+  animation-delay: 3s;
+}
+
+/* Primary path animation — smooth loop */
+@keyframes animation-path {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+/* Secondary data packet animation — faster, pulsing */
+@keyframes animation-path-data {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  8% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.2);
+  }
+  90% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
