@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { Menu, X, ArrowRight, Phone, Mail } from "lucide-react";
 import { LiquidButton } from "./ui/LiquidButton";
+import { getAssetPath } from "@/lib/utils";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -149,11 +150,11 @@ export default function Navbar() {
 
               {/* Brand Logo Image (Swaps automatically depending on scroll background) */}
               <Image
-                src={
+                src={getAssetPath(
                   scrolled
                     ? "/images/brand-logo-dark-text.png"
                     : "/images/brand-logo-no-tagline.png"
-                }
+                )}
                 alt="OzInfra"
                 width={180}
                 height={45}
@@ -255,7 +256,7 @@ export default function Navbar() {
             <div className="w-full flex items-center justify-between px-6 py-5 border-b border-white/5 bg-oz-black/85 backdrop-blur-md relative z-10 shrink-0">
               <Link href="/" onClick={() => setMenuOpen(false)} aria-label="OzInfra Home">
                 <Image
-                  src="/images/brand-logo-no-tagline.png"
+                  src={getAssetPath("/images/brand-logo-no-tagline.png")}
                   alt="OzInfra"
                   width={150}
                   height={38}

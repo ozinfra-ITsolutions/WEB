@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import TextReveal from "../components/TextReveal";
+import { getAssetPath } from "@/lib/utils";
 
 const projects = [
   {
@@ -76,7 +77,7 @@ export default function CaseStudies() {
             >
               <div className="relative overflow-hidden bg-oz-black">
                 <img
-                  src={project.image}
+                  src={getAssetPath(project.image)}
                   alt={project.title}
                   className={`w-full aspect-[4/3] object-cover transition-all duration-700 ${
                     hoveredIndex === index ? "scale-110 brightness-110" : ""

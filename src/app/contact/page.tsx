@@ -25,6 +25,7 @@ import OzInfraFAQ from "@/sections/FAQ";
 import { contactFAQs } from "@/data/faqData";
 import { LiquidButton } from "@/components/ui/LiquidButton";
 import PixelDissolveButton from "@/components/ui/pixel-dissolve-button";
+import { getAssetPath } from "@/lib/utils";
 import {
   type FormData,
   type ValidationErrors,
@@ -602,7 +603,7 @@ export default function Contact() {
         {/* Next.js Optimized Preloaded Hero Background Image */}
         <div className="absolute inset-0 select-none pointer-events-none">
           <Image
-            src="/images/contact-hero.webp"
+            src={getAssetPath("/images/contact-hero.webp")}
             alt="Enterprise IT infrastructure"
             fill
             sizes="100vw"

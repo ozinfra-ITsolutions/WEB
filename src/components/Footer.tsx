@@ -15,6 +15,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { CONTACT_INFO } from "../lib/constants/contact";
+import { getAssetPath } from "@/lib/utils";
 
 const footerLinks = {
   services: [
@@ -104,7 +105,7 @@ const TechCorners = () => (
       }}
     >
       <Image
-        src="/images/brand-logo-outline.png"
+        src={getAssetPath("/images/brand-logo-outline.png")}
         alt=""
         width={600}
         height={600}
@@ -220,7 +221,7 @@ export default function Footer() {
             <Link href="/" className="block mb-8 w-fit group" aria-label="OzInfra Home">
               {/* Brand Logo with Tagline Image */}
               <Image
-                src="/images/brand-logo-tagline.png"
+                src={getAssetPath("/images/brand-logo-tagline.png")}
                 alt="OzInfra — Enterprise IT Solutions"
                 width={280}
                 height={70}

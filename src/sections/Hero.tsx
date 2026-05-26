@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Shield, Cloud, Cpu } from "lucide-react";
 import ScrollReveal from "../components/ScrollReveal";
 import { LiquidButton } from "../components/ui/LiquidButton";
+import { getAssetPath } from "@/lib/utils";
 
 const PARTICLE_COUNT = 80;
 
@@ -93,7 +94,7 @@ export default function Hero() {
           }}
         >
           <Image
-            src="/images/home-hero.webp"
+            src={getAssetPath("/images/home-hero.webp")}
             alt="Enterprise server racks in Hobart data center with glowing orange LED indicator lights"
             fill
             sizes="100vw"

@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { LiquidButton } from "./LiquidButton";
+import { getAssetPath } from "@/lib/utils";
 
 interface ServiceType {
   icon: React.ReactNode;
@@ -240,7 +241,7 @@ function AboutUsMobile({ services }: { services: ServiceType[] }) {
             <div className="relative w-full max-w-sm">
               <div className="rounded-xl overflow-hidden shadow-2xl relative border border-white/5">
                 <img
-                  src="/images/about-hero.webp"
+                  src={getAssetPath("/images/about-hero.webp")}
                   alt="Modern enterprise server infrastructure in Hobart, Tasmania"
                   className="w-full aspect-[3/4] object-cover"
                 />
@@ -412,7 +413,7 @@ function AboutUsDesktop({
               <div className="relative w-full max-w-sm">
                 <div className="rounded-xl overflow-hidden shadow-2xl relative border border-white/5">
                   <img
-                    src="/images/about-hero.webp"
+                    src={getAssetPath("/images/about-hero.webp")}
                     alt="Modern enterprise server infrastructure in Hobart, Tasmania"
                     className="w-full aspect-[3/4] object-cover"
                   />

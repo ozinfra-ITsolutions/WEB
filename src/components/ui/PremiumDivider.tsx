@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { getAssetPath } from "@/lib/utils";
 
 interface Ripple {
   id: number;
@@ -148,7 +149,7 @@ export default function PremiumDivider() {
             {/* Brand Logo Icon */}
             <div className="relative w-9 h-9 z-10 transition-transform duration-500 group-hover:scale-110">
               <Image
-                src="/images/logo-icon.png"
+                src={getAssetPath("/images/logo-icon.png")}
                 alt="OzInfra logo icon"
                 fill
                 sizes="36px"
